@@ -1,0 +1,16 @@
+= Indice degli Articoli e Guide Tecniche
+:author: Antigravity AI & Sviluppatore
+:revdate: {localdate}
+:doctype: article
+:toc: macro
+:toc-title: Indice delle sezioni
+:icons: font
+:source-highlighter: rouge
+:experimental:
+
+Benvenuto nell'indice della documentazione tecnica. Questa sezione raccoglie articoli, guide e approfondimenti sull'utilizzo degli strumenti di intelligenza artificiale, pattern di sviluppo e metodologie di integrazione.
+
+toc::[]
+
+include::antigravity-ide-utilizzo.adoc[leveloffset=+1]
+
