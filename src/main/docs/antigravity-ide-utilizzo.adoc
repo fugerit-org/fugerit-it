@@ -1,0 +1,76 @@
+= Guida all'Integrazione dei Modelli (Gemini, Claude, ChatGPT) in Antigravity IDE
+:author: Antigravity AI & Sviluppatore
+:toc: macro
+:toc-title: Indice dei contenuti
+:icons: font
+
+Questo documento illustra come combinare strategicamente l'uso di diversi modelli linguistici (Gemini, Anthropic Claude, OpenAI ChatGPT) all'interno dell'ambiente di lavoro con l'assistente agentico *Antigravity*, ottimizzando le quote di utilizzo e le finestre di contesto.
+
+toc::[]
+
+== 1. Gestione delle Quote e dei Limiti
+
+A seconda degli abbonamenti attivi, la disponibilità e i limiti dei modelli variano notevolmente.
+
+=== Modelli Gemini (Google)
+* *Stato:* Coperti dall'abbonamento **Google AI Premium ($19.99/mese)**.
+* *Quota:* Molto elevata/illimitata per l'uso quotidiano ordinario, con finestre di contesto eccezionalmente ampie.
+* *Utilizzo consigliato:* Come modelli primari ("workhorse") per la maggior parte dei task.
+
+=== Modelli Anthropic (Claude Sonnet/Opus) e OpenAI (ChatGPT/GPT-4o)
+* *Stato:* Gestiti tramite piano gratuito (free tier) dell'IDE o tramite chiavi API dedicate.
+* *Quota:* **Molto limitata**. Nel piano gratuito/condiviso dell'IDE, sono soggetti a rigidi limiti di messaggi o token che si azzerano periodicamente (es. ogni 3-5 ore).
+* *Utilizzo consigliato:* Modelli specialistici per compiti di precisione, da usare in modo mirato per non esaurire rapidamente la quota.
+
+== 2. Flusso di Lavoro Ibrido (Hybrid Workflow)
+
+Per massimizzare l'efficacia risparmiando le quote dei modelli più restrittivi (Claude/ChatGPT), si consiglia di suddividere il lavoro in fasi:
+
+[cols="1,1,2", options="header"]
+|===
+|Fase di Lavoro |Modello Consigliato |Strategia e Motivazione
+
+|1. Analisi, Ricerca e Setup
+|Gemini Flash
+|Lettura iniziale del codice, scansione del workspace ed elaborazione del piano d'azione. Sfrutta l'ampia finestra di contesto di Gemini a costo zero.
+
+|2. Implementazione della Logica Core
+|Claude Sonnet / GPT-4o
+|Scrittura del codice algoritmico principale o refactoring di classi complesse. Ottima capacità di generazione sintattica e logica.
+
+|3. Debugging Critico e Analisi Logica
+|Claude Opus / Gemini (Thinking)
+|Risoluzione di bug ostici o analisi di problemi di concurrency/architettura che richiedono una capacità di ragionamento profonda.
+
+|4. Scrittura Test e Documentazione
+|Gemini Flash
+|Generazione di unit test ripetitivi, JavaDoc, file README e documentazione AsciiDoc. Operazione rapida a consumi minimi.
+|===
+
+== 3. Regole d'Oro per il Risparmio di Quota (Claude & ChatGPT)
+
+Quando utilizzi i modelli Anthropic o OpenAI all'interno di Antigravity, adotta questi accorgimenti per non esaurire i messaggi disponibili:
+
+1. **Evita la Cronologia Inutile:** Quando passi da Gemini (usato per l'analisi preliminare) a Claude/ChatGPT per la scrittura del codice, **apri una nuova chat** o effettua un **Reset Context**. Se mantieni la stessa chat, l'intera cronologia dei messaggi precedenti verrà inviata al nuovo modello, consumando istantaneamente una gran quantità di token della sua quota limitata.
+2. **Fornisci solo il Contesto Necessario:** Invece di far scansionare l'intero progetto a Claude, incolla nel prompt solo la porzione di codice o la firma del metodo su cui deve lavorare.
+3. **Pianifica con Gemini, Esegui con Claude:** Chiedi a Gemini Flash di generare un piano d'azione dettagliato, poi passa a Claude o GPT per implementare i singoli step del piano.
+4. **Tecnica del "Prompt Handoff" (Meta-Prompting):** Questo è uno dei metodi più efficaci. Al termine di un'analisi svolta con Gemini (grazie al suo ampio contesto), chiedigli esplicitamente:
++
+[quote]
+"Generami un prompt autonomo e dettagliato da dare in pasto a Claude Sonnet per fare [descrivi l'azione, es. il refactoring della classe X]. Il prompt deve includere il codice sorgente rilevante estratto, i vincoli e le istruzioni passo-passo necessarie, in modo che Sonnet non abbia bisogno di accedere ad altri file del progetto."
++
+In questo modo dovrai solo copiare il prompt generato da Gemini, aprire una nuova chat pulita con Sonnet ed incollarlo, ottenendo il massimo della precisione con il minimo consumo di token.
+
+== 4. Risorse Utili e Riferimenti
+
+Per approfondire le metodologie e accedere agli strumenti menzionati:
+
+=== Strumenti e Piattaforme
+* *Google Gemini:* link:https://gemini.google.com/[Interfaccia Web Gemini] | link:https://aistudio.google.com/[Google AI Studio (per chiavi API)]
+* *Anthropic Claude:* link:https://claude.ai/[Interfaccia Web Claude] | link:https://console.anthropic.com/[Anthropic Console]
+* *OpenAI ChatGPT:* link:https://chatgpt.com/[Interfaccia Web ChatGPT] | link:https://platform.openai.com/[OpenAI Developer Platform]
+
+=== Metodologie e Concetti Chiave
+* *Meta-Prompting (Prompt Handoff):* Tecnica in cui un LLM genera le istruzioni ottimali per un altro LLM, isolando il contesto necessario.
+* *In-Context Learning:* Ottimizzazione del contesto fornito al modello per ridurre al minimo le allucinazioni e l'uso inutile di token.
+* *Hybrid AI Development Workflow:* Approccio di sviluppo software che sfrutta in sequenza i punti di forza dei diversi provider (Google, Anthropic, OpenAI) a seconda della fase del ciclo di vita del software (SDLC).
