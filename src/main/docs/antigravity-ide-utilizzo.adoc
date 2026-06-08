@@ -1,5 +1,6 @@
 = Guida all'Integrazione dei Modelli (Gemini, Claude, ChatGPT) in Antigravity IDE
-:author: Antigravity AI & Sviluppatore
+:author: Matteo Franci con l'aiuto di Antigravity AI
+:email: m@fugerit.org
 :revdate: {localdate}
 :doctype: article
 :toc: macro

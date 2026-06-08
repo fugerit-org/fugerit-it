@@ -1,5 +1,6 @@
-= Indice degli Articoli e Guide Tecniche
-:author: Antigravity AI & Sviluppatore
+= Articoli e guide tecniche
+:author: Matteo Franci con l'aiuto di Antigravity AI
+:email: m@fugerit.org
 :revdate: {localdate}
 :doctype: article
 :toc: macro
@@ -8,10 +9,10 @@
 :source-highlighter: rouge
 :experimental:
 
-Benvenuto nell'indice della documentazione tecnica. Questa sezione raccoglie articoli, guide e approfondimenti sull'utilizzo degli strumenti di intelligenza artificiale, pattern di sviluppo e metodologie di integrazione.
+Questo progetto raccoglie degli articoli in cui ho provato a mettere insieme alcune delle metodologie usate nello sviluppo del codice presente nell'organizzazione GitHub https://github.com/fugerit-org
 
 [.text-right]
-icon:file-pdf-o[] link:index.pdf[Scarica l'intera documentazione in formato PDF]
+icon:file-pdf-o[] link:index.pdf[Scarica in formato PDF]
 
 toc::[]
 
