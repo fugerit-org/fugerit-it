@@ -21,8 +21,6 @@ concurrency:
 jobs:
   build-docs:
     runs-on: ubuntu-latest
-    container:
-      image: asciidoctor/docker-asciidoctor:latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -30,10 +28,10 @@ jobs:
       - name: Build HTML and PDF
         run: |
           mkdir -p build
-          # Genera HTML
-          asciidoctor -r asciidoctor-diagram -D build src/main/docs/index.adoc
-          # Genera PDF
-          asciidoctor-pdf -r asciidoctor-diagram -D build src/main/docs/index.adoc
+          # Genera HTML e PDF tramite container Docker asciidoctor/docker-asciidoctor
+          docker run --rm -v ${{ github.workspace }}:/documents asciidoctor/docker-asciidoctor \
+            sh -c "asciidoctor -r asciidoctor-diagram -D /documents/build /documents/src/main/docs/index.adoc && \
+                  asciidoctor-pdf -r asciidoctor-diagram -D /documents/build /documents/src/main/docs/index.adoc"
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
